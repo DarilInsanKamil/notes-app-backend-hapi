@@ -1,9 +1,9 @@
 /* eslint-disable indent */
 const { Pool } = require('pg');
 const { nanoid } = require('nanoid');
-const InvariantError = require('../../api/notes/exceptions/InvariantErrror');
+const InvariantError = require('../../exceptions/InvariantErrror');
 const mapDBToModel = require('../../utils');
-const NotFounderror = require('../../api/notes/exceptions/NotFoundError');
+const NotFounderror = require('../../exceptions/NotFoundError');
 
 class NotesService {
     constructor() {

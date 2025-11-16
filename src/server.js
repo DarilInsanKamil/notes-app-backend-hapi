@@ -5,7 +5,6 @@ const Jwt = require('@hapi/jwt');
 
 const notes = require('./api/notes');
 const NotesValidator = require('./validator/notes');
-const ClientError = require('./api/notes/exceptions/ClientError');
 const NotesService = require('./services/postgres/NoteService');
 
 const users = require('./api/users');
@@ -17,6 +16,7 @@ const authentications = require('./api/authentications');
 const AuthenticationsService = require('./services/postgres/AuthenticationsService');
 const TokenManager = require('./tokenize/TokenManager');
 const AuthenticationsValidator = require('./validator/authentications');
+const ClientError = require('./exceptions/ClientError');
 
 const init = async () => {
     const notesService = new NotesService();
@@ -65,10 +65,8 @@ const init = async () => {
     ]);
 
     server.ext('onPreResponse', (request, h) => {
-        // mendapatkan konteks response dari request
         const { response } = request;
 
-        // penanganan client error secara internal.
         if (response instanceof ClientError) {
             const newResponse = h.response({
                 status: 'fail',

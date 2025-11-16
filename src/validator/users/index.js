@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-const InvariantError = require('../../api/notes/exceptions/InvariantErrror');
+const InvariantError = require('../../exceptions/InvariantErrror');
 const { UserPayloadSchema } = require('./schema');
 
 const UsersValidator = {

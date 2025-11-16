@@ -1,5 +1,5 @@
 const Jwt = require('@hapi/jwt');
-const InvariantError = require('../api/notes/exceptions/InvariantErrror');
+const InvariantError = require('../exceptions/InvariantErrror');
 
 const TokenManager = {
   generateAccessToken: (payload) => Jwt.token.generate(payload, process.env.ACCESS_TOKEN_KEY),
@@ -11,7 +11,7 @@ const TokenManager = {
       const { payload } = artifacts.decoded;
       return payload;
     } catch (error) {
-      throw new InvariantError('Refresh token tidak valid');
+      throw new InvariantError('Refresh token tidak valid', error);
     }
   },
 

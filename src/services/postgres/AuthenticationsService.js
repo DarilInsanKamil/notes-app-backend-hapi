@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
-const InvariantError = require('../../api/notes/exceptions/InvariantErrror');
+const InvariantError = require('../../exceptions/InvariantErrror');
+
 
 class AuthenticationsService {
   constructor() {
@@ -29,13 +30,10 @@ class AuthenticationsService {
   }
 
   async deleteRefreshToken(token) {
-    await this.verifyRefreshToken(token);
-
     const query = {
       text: 'DELETE FROM authentications WHERE token = $1',
       values: [token],
     };
-
     await this._pool.query(query);
   }
 }
